@@ -17,6 +17,22 @@ public class Reserva {
         this.status = "Pendente";
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public Date getDataCheckIn() {
+        return dataCheckIn;
+    }
+
+    public Date getDataCheckOut() {
+        return dataCheckOut;
+    }
+
     public int calcularDuracao() {
         long duracao = (dataCheckOut.getTime() - dataCheckIn.getTime()) / (1000 * 60 * 60 * 24);
         return (int) duracao;
