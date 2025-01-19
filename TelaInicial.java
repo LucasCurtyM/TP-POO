@@ -1,7 +1,7 @@
-import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.*;
 
 public class TelaInicial extends JFrame {
 
@@ -73,11 +73,12 @@ public class TelaInicial extends JFrame {
 
         // Definir o layout como null para controle total da posição dos botões
         panel.setLayout(null);
+      
 
         // Definindo os botões para posição absoluta, para controlar diretamente
-        loginButton.setBounds(100, 150, 80, 30);  // Posição e tamanho do botão login
-        cadastroButton.setBounds(200, 150, 80, 30);  // Posição e tamanho do botão cadastro
-        hotelButton.setBounds(150, 200, 120, 30);  // Posição e tamanho do botão ir para o hotel
+        loginButton.setBounds(100, 150, 100, 30);  // Posição e tamanho do botão login
+        cadastroButton.setBounds(200, 150, 100, 30);  // Posição e tamanho do botão cadastro
+        hotelButton.setBounds(150, 200, 100, 30);  // Posição e tamanho do botão ir para o hotel
 
         // Adicionando os botões diretamente no painel
         panel.add(loginButton);

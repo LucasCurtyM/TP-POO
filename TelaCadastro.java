@@ -1,94 +1,127 @@
-import javax.swing.*;
 import java.awt.*;
+import javax.swing.*;
 
 public class TelaCadastro extends JFrame {
     private JTextField emailField;
     private JPasswordField senhaField;
     private JButton cadastrarButton;
-    private Cadastro cadastro; // Instância da classe Cadastro
+    private JRadioButton usuarioToggle;
+    private JRadioButton hospedeToggle;
+    private Cadastro cadastro;
 
     public TelaCadastro() {
-        // Configuração da tela
-        setTitle("Tela de Cadastro");
-        setSize(400, 300); // Tamanho ajustado
+        setTitle("Cadastro de Usuário");
+        setSize(450, 400);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLocationRelativeTo(null); // Centraliza a tela na tela do usuário
+        setLocationRelativeTo(null);
 
-        // Criando a instância de Cadastro
         cadastro = new Cadastro();
 
-        // Painel principal com BoxLayout para centralizar os componentes
-        JPanel panel = new JPanel();
-        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS)); // Alinhamento vertical
+        // Painel principal
+        JPanel mainPanel = new JPanel();
+        mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
+        mainPanel.setBackground(new Color(240, 240, 255)); // Cor de fundo suave
 
-        // Definindo o título
-        JLabel titleLabel = new JLabel("Cadastro de Usuário", JLabel.CENTER);
-        titleLabel.setFont(new Font("Arial", Font.BOLD, 18));
-        titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT); // Alinha o título no centro
-        panel.add(titleLabel);
+        // Título
+        JLabel titleLabel = new JLabel("Cadastro de Usuario");
+        titleLabel.setFont(new Font("Arial", Font.BOLD, 22));
+        titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        titleLabel.setForeground(new Color(50, 50, 150)); // Cor do texto
+        mainPanel.add(Box.createRigidArea(new Dimension(0, 20)));
+        mainPanel.add(titleLabel);
 
-        panel.add(Box.createRigidArea(new Dimension(0, 20))); // Espaço entre o título e os campos
-
-        // Painel dos campos de entrada, com BoxLayout para os campos
+        // Painel de campos
         JPanel fieldsPanel = new JPanel();
-        fieldsPanel.setLayout(new BoxLayout(fieldsPanel, BoxLayout.Y_AXIS)); // Alinhamento vertical
-        fieldsPanel.setAlignmentX(Component.CENTER_ALIGNMENT); // Alinha os campos no centro
+        fieldsPanel.setLayout(new BoxLayout(fieldsPanel, BoxLayout.Y_AXIS));
+        fieldsPanel.setOpaque(false); // Transparente para fundo principal
+        fieldsPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        fieldsPanel.setBorder(BorderFactory.createEmptyBorder(20, 120, 20, 20));
 
-        // E-mail
         JLabel emailLabel = new JLabel("E-mail:");
-        emailLabel.setAlignmentX(Component.CENTER_ALIGNMENT); // Alinha o rótulo ao centro
         emailField = new JTextField(20);
+        emailField.setMaximumSize(new Dimension(400, 30));
         emailField.setBorder(BorderFactory.createLineBorder(Color.GRAY));
-        emailField.setMaximumSize(new Dimension(300, 30)); // Define o tamanho máximo do campo de texto
+        emailField.setToolTipText("Digite seu e-mail");
 
-        // Senha
         JLabel senhaLabel = new JLabel("Senha:");
-        senhaLabel.setAlignmentX(Component.CENTER_ALIGNMENT); // Alinha o rótulo ao centro
         senhaField = new JPasswordField(20);
+        senhaField.setMaximumSize(new Dimension(400, 30));
         senhaField.setBorder(BorderFactory.createLineBorder(Color.GRAY));
-        senhaField.setMaximumSize(new Dimension(300, 30)); // Define o tamanho máximo do campo de senha
+        senhaField.setToolTipText("Digite sua senha");
 
-        // Adicionando os campos ao painel de campos
         fieldsPanel.add(emailLabel);
         fieldsPanel.add(emailField);
-        fieldsPanel.add(Box.createRigidArea(new Dimension(0, 10))); // Espaço entre os campos
+        fieldsPanel.add(Box.createRigidArea(new Dimension(0, 15)));
         fieldsPanel.add(senhaLabel);
         fieldsPanel.add(senhaField);
 
-        // Adiciona o painel de campos ao painel principal
-        panel.add(fieldsPanel);
+        mainPanel.add(Box.createRigidArea(new Dimension(0, 20)));
+        mainPanel.add(fieldsPanel);
 
-        // Espaço entre os campos e o botão
-        panel.add(Box.createRigidArea(new Dimension(0, 20)));
+        // Painel de alternância
+        JLabel toggleLabel = new JLabel("Selecione o tipo:");
+        toggleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        toggleLabel.setFont(new Font("Arial", Font.PLAIN, 14));
+
+        usuarioToggle = new JRadioButton("Usuário");
+        hospedeToggle = new JRadioButton("Hóspede");
+
+        ButtonGroup group = new ButtonGroup();
+        group.add(usuarioToggle);
+        group.add(hospedeToggle);
+
+        usuarioToggle.setSelected(true);
+
+        JPanel togglePanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 10));
+        togglePanel.setOpaque(false); // Transparente para fundo principal
+        togglePanel.add(usuarioToggle);
+        togglePanel.add(hospedeToggle);
+
+        mainPanel.add(Box.createRigidArea(new Dimension(0, 15)));
+        mainPanel.add(toggleLabel);
+        mainPanel.add(togglePanel);
 
         // Botão de cadastro
         cadastrarButton = new JButton("Cadastrar");
-        cadastrarButton.setBackground(new Color(34, 139, 34)); // Cor verde para o botão
+        cadastrarButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        cadastrarButton.setBackground(new Color(0, 120, 215)); // Azul moderno
         cadastrarButton.setForeground(Color.WHITE);
-        cadastrarButton.setAlignmentX(Component.CENTER_ALIGNMENT); // Alinha o botão no centro
-        panel.add(cadastrarButton);
+        cadastrarButton.setFont(new Font("Arial", Font.BOLD, 14));
+        cadastrarButton.setToolTipText("Clique para realizar o cadastro");
 
-        // Cor de fundo para a tela
-        getContentPane().setBackground(new Color(240, 240, 240)); // Cor suave de fundo
+        mainPanel.add(Box.createRigidArea(new Dimension(0, 20)));
+        mainPanel.add(cadastrarButton);
+        mainPanel.add(Box.createRigidArea(new Dimension(0, 20)));
 
-        // Adicionando o painel principal à tela
-        add(panel);
+        // Adicionar painel principal à janela
+        add(mainPanel);
 
-        // Ação do botão de cadastro
+        // Ação do botão
         cadastrarButton.addActionListener(e -> {
             String email = emailField.getText();
             String senha = new String(senhaField.getPassword());
 
-            // Chama o método da classe Cadastro para realizar o cadastro
-            cadastro.realizaCadastro(email, senha);
+            if (email.isEmpty() || senha.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Preencha todos os campos!", "Erro", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
 
-            // Abre a tela de reserva após cadastro
-            TelaReserva telaReserva = new TelaReserva();
-            telaReserva.setVisible(true);
+            if (usuarioToggle.isSelected()) {
+                cadastro.realizaCadastro("nome", "cpf", email, senha, "Usuario");
+            } else if (hospedeToggle.isSelected()) {
+                cadastro.realizaCadastro("nome", "cpf", email, senha, "Hospede");
+            }
 
-            // Fecha a tela de cadastro
+            JOptionPane.showMessageDialog(this, "Cadastro realizado com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
             setVisible(false);
             dispose();
+        });
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> {
+            TelaCadastro telaCadastro = new TelaCadastro();
+            telaCadastro.setVisible(true);
         });
     }
 }

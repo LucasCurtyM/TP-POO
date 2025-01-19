@@ -1,0 +1,3 @@
+joao@example.com,senha123,Usuario
+maria@example.com,senha456,Hospede
+siudnadiojasod,fadfsfdsf,Hospede

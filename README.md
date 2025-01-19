@@ -8,4 +8,5 @@ O trabalho consiste em desenvolver um sistema de reserva de vagas de um hotel.
 3. Implementar a classe Hotel.
 4. Implementar a classe Cliente.
 5. Implementar a classe Gerente.
-7. Implementar a classe Main.
+6. Implementar a classe Main.
+7. Criação e implementação da Interface Gráfica

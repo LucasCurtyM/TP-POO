@@ -6,14 +6,14 @@ public class Reserva {
     private Date dataCheckIn;
     private Date dataCheckOut;
     private String status;
-    private List<Hospede> hospedes;  // Alterado para List<Hospede>
+    private List<Hospede> hospedes;
     private Quarto quarto;
 
     public Reserva(int id, Date dataCheckIn, Date dataCheckOut, List<Hospede> hospedes, Quarto quarto) {
         this.id = id;
         this.dataCheckIn = dataCheckIn;
         this.dataCheckOut = dataCheckOut;
-        this.hospedes = hospedes;  // Agora é uma lista de hóspedes
+        this.hospedes = hospedes;  
         this.quarto = quarto;
         this.status = "Pendente";
     }

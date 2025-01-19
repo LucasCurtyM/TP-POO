@@ -1,59 +1,26 @@
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-
-public class Hospede {
-    private String nome;
-    private String cpf;
-    private String email;
-    private boolean logado;
+public class Hospede extends Usuario {
     private List<Reserva> reservas;
 
     public Hospede(String nome, String cpf, String email) {
-        this.nome = nome;
-        this.cpf = cpf;
-        this.email = email;
-        this.logado = false;
+        super(nome, cpf, email);
         this.reservas = new ArrayList<>();
     }
 
-    public void setLogado(boolean status) {
-        this.logado = status;
+    public void adicionarReserva(Reserva reserva) {
+        reservas.add(reserva);
     }
 
-    public boolean isLogado() {
-        return logado;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public String getCpf() {
-        return cpf;
-    }
-
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
+    @Override
     public void verificarReservas() {
         if (reservas.isEmpty()) {
-            System.out.println("Nenhuma reserva encontrada para o hóspede " + nome + ".");
+            System.out.println("Nenhuma reserva encontrada para o hóspede " + getNome() + ".");
         } else {
-            System.out.println("Reservas do hóspede " + nome + ":");
+            System.out.println("Reservas do hóspede " + getNome() + ":");
             for (Reserva reserva : reservas) {
                 System.out.println("Reserva ID: " + reserva.getId() +
                         ", Status: " + reserva.getStatus() +
@@ -63,4 +30,34 @@ public class Hospede {
         }
     }
 
+    @Override
+    public void exibirPerfil() {
+        super.exibirPerfil();
+        System.out.println("Tipo: Hóspede");
+        System.out.println("Reservas associadas: " + reservas.size());
+    }
+
+    @Override
+    public void login() {
+        System.out.println("Bem-vindo, " + getNome() + ". Você está logado como hóspede.");
+        setLogado(true);
+    }
+
+    @Override
+    public void listarAtividades() {
+        System.out.println("Hóspede pode acessar as seguintes atividades:");
+        System.out.println("- Visualizar reservas");
+        System.out.println("- Modificar reservas");
+        System.out.println("- Solicitar serviços adicionais");
+    }
+
+    // Sobrescreve o método para escrever "Hospede" no arquivo
+    @Override
+    public void escreverUsuario(String senha) {
+        try (FileWriter writer = new FileWriter(Cadastro.FILE_NAME, true)) {
+            writer.write(getEmail() + "," + senha + ",Hospede\n");
+        } catch (IOException e) {
+            System.out.println("Erro ao salvar o hóspede: " + e.getMessage());
+        }
+    }
 }
